@@ -34,3 +34,19 @@ Feature: Test scenario for Amazon
       | 11111   |
       | 4       |
       | asdgf   |
+
+  Scenario Outline: Search for item using search bar
+    Given User is on "Main Page"
+    When User on "Main Page" search for "<keyword>" keyword
+    Then User is navigated to "Search Page"
+    And Results header on "Search Page" contains "<keyword>" keyword
+    Examples:
+      | keyword     |
+      | mouse       |
+      | nice laptop |
+
+  Scenario: Negative search for item using search bar
+    Given User is on "Main Page"
+    When User on "Main Page" search for "ofgj87bwsnf8934hr" keyword
+    Then User is navigated to "Search Page"
+    And On "Search Page" the message No results for "ofgj87bwsnf8934hr" is shown

@@ -1,7 +1,9 @@
 package steps;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.testng.Assert;
 import pageobjects.ProductPage;
 import pageobjects.SearchPage;
 
@@ -26,5 +28,16 @@ public class SearchPageSteps {
     @When("User on {string} clicks on the first product")
     public void userOnClicksOnTheFirstProduct(String pageName) {
         ((SearchPage)PAGES.get(pageName)).clickFirstResult();
+    }
+
+    @And("Results header on {string} contains {string} keyword")
+    public void resultsHeaderOnContainsKeyword(String pageName, String keyword) {
+        Assert.assertTrue(((SearchPage) PAGES.get(pageName)).getResultsHeaderText().contains(keyword));
+    }
+
+    @And("On {string} the message No results for {string} is shown")
+    public void onTheMessageIsShown(String pageName, String keyword) {
+        String actualMessage = ((SearchPage)PAGES.get(pageName)).getNoResultsMessage();
+        Assert.assertEquals(actualMessage, "No results for " + keyword + ".");
     }
 }

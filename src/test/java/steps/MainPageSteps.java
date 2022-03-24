@@ -48,4 +48,9 @@ public class MainPageSteps {
         String actualMessage = webDriver.findElement(By.id("GLUXZipError")).getText();
         Assert.assertEquals(actualMessage, expectedMessage);
     }
+
+    @When("User on {string} search for {string} keyword")
+    public void userOnSearchForKeyword(String pageName, String keyword) {
+        ((MainPage)PAGES.get(pageName)).searchForKeyword(keyword);
+    }
 }

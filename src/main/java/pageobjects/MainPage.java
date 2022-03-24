@@ -1,6 +1,7 @@
 package pageobjects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,15 +16,18 @@ import java.util.stream.Collectors;
 public class MainPage extends BasePage {
 
     @FindBy(xpath = "//a[@aria-label=\"Headsets\"]")
-    public WebElement headsetesLink;
+    private WebElement headsetesLink;
 
-    WebElement deliverIcon;
+    private WebElement deliverIcon;
 
     @FindBy(xpath = "//span[text()=\"Apply\"]/..")
-    WebElement applyZipCodeButton;
+    private WebElement applyZipCodeButton;
 
     @FindBy(id = "glow-ingress-line2")
-    WebElement destinationName;
+    private WebElement destinationName;
+
+    @FindBy(id = "twotabsearchtextbox")
+    private WebElement searchBar;
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -73,5 +77,11 @@ public class MainPage extends BasePage {
 //        need to initialize deliverIcon here because after using @FindBy stalenessOf doesn't work
         deliverIcon = driver.findElement(By.id("glow-ingress-block"));
         return this;
+    }
+
+    public SearchPage searchForKeyword(String searchKeyword) {
+        searchBar.sendKeys(searchKeyword);
+        searchBar.sendKeys(Keys.ENTER);
+        return new SearchPage(driver);
     }
 }
