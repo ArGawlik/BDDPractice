@@ -43,6 +43,12 @@ public class MainPage extends BasePage {
         destinationName = driver.findElement(By.id("glow-ingress-line2"));
     }
 
+    public void setInvalidZipcode(String zipCode) {
+        deliverIcon.click();
+        DeliveryModule deliveryModule = new DeliveryModule(driver);
+        deliveryModule.setInvalidZipCode(zipCode);
+    }
+
     public MainPage changeCountry(String country) {
         deliverIcon.click();
         DeliveryModule deliveryModule = new DeliveryModule(driver);

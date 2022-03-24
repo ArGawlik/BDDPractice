@@ -20,7 +20,6 @@ public class DeliveryModule extends BasePage {
 
     WebElement doneButton;
 
-
     public DeliveryModule(WebDriver driver) {
         super(driver);
         zipCodeInput = new WebDriverWait(driver, Duration.ofSeconds(10))
@@ -55,5 +54,12 @@ public class DeliveryModule extends BasePage {
         WebElement doneButton = driver.findElement(By.xpath("//button[@name=\"glowDoneButton\"]"));
         doneButton.click();
         return new MainPage(driver);
+    }
+
+    public void setInvalidZipCode(String zipcode) {
+        zipCodeInput.sendKeys(zipcode);
+        applyButton.click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("GLUXZipError")));
     }
 }

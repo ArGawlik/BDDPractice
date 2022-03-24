@@ -3,6 +3,7 @@ package steps;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import pageobjects.MainPage;
 
@@ -35,5 +36,16 @@ public class MainPageSteps {
     @When("User on {string} clicks on Headsets link")
     public void userOnClicksOnHeadsetsLink(String pageName) {
         ((MainPage)PAGES.get(pageName)).headsetsLinkClick();
+    }
+
+    @When("User on {string} set invalid zip code  {string} and click Apply button")
+    public void userOnSetInvalidZipCodeAndClickApplyButton(String pageName, String zipcode) {
+        ((MainPage)PAGES.get(pageName)).setInvalidZipcode(zipcode);
+    }
+
+    @Then("On Delivery Module appears message {string}")
+    public void onDeliveryModuleAppearsMessage(String expectedMessage) {
+        String actualMessage = webDriver.findElement(By.id("GLUXZipError")).getText();
+        Assert.assertEquals(actualMessage, expectedMessage);
     }
 }
