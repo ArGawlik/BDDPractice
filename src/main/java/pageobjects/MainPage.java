@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -28,6 +29,9 @@ public class MainPage extends BasePage {
 
     @FindBy(id = "twotabsearchtextbox")
     private WebElement searchBar;
+
+    @FindBy(id = "nav-link-accountList")
+    private WebElement accountLink;
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -83,5 +87,16 @@ public class MainPage extends BasePage {
         searchBar.sendKeys(searchKeyword);
         searchBar.sendKeys(Keys.ENTER);
         return new SearchPage(driver);
+    }
+
+    public RegistrationPage openPopUpAndClickStartHereToRegister(){
+        Actions actions = new Actions(driver);
+        actions.moveToElement(accountLink);
+        actions.perform();
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable
+                        (By.partialLinkText("Start here.")))
+                .click();
+        return new RegistrationPage(driver);
     }
 }

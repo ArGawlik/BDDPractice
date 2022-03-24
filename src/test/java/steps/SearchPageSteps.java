@@ -5,6 +5,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobjects.ProductPage;
+import pageobjects.RegistrationPage;
 import pageobjects.SearchPage;
 
 import static steps.BaseStep.PAGES;
@@ -21,6 +22,10 @@ public class SearchPageSteps {
             case "Product Page" -> {
                 ProductPage productPage = new ProductPage(webDriver);
                 PAGES.put(pageName, productPage);
+            }
+            case "Registration Page" -> {
+                RegistrationPage registrationPage = new RegistrationPage(webDriver);
+                PAGES.put(pageName, registrationPage);
             }
         }
     }

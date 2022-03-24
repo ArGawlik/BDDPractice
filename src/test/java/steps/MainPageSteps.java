@@ -53,4 +53,10 @@ public class MainPageSteps {
     public void userOnSearchForKeyword(String pageName, String keyword) {
         ((MainPage)PAGES.get(pageName)).searchForKeyword(keyword);
     }
+
+    @When("User on {string} move cursor to Account Box and click Start here")
+    public void userOpenAccountPopUpAndClickStartHere(String pageName) {
+        ((MainPage)PAGES.get(pageName)).openPopUpAndClickStartHereToRegister();
+    }
+
 }
